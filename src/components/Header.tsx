@@ -1,38 +1,60 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import Image from 'next/image'
+import { useState, useEffect } from 'react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container-custom flex justify-between items-center py-4">
-        <Link href="/" className="text-2xl font-bold text-blue-600">
-          AMC Automação
+    <header className="bg-white shadow-md sticky top-0 z-40">
+      <nav className={`container-custom flex justify-between items-center px-6 transition-all duration-300 ${isScrolled ? 'py-1' : 'py-2'}`}>
+        <Link href="/" className="flex items-center flex-shrink-0">
+          <Image 
+            src="/logo-new.png" 
+            alt="AMC Automação" 
+            width={221}
+            height={77}
+            className={`w-auto h-auto drop-shadow-lg transition-all duration-300 ${isScrolled ? 'scale-75' : 'scale-100'}`}
+          />
         </Link>
 
         {/* Menu Desktop */}
-        <ul className="hidden md:flex gap-8">
+        <ul className="hidden md:flex gap-10 items-center ml-auto">
           <li>
-            <Link href="/" className="hover:text-blue-600 transition-colors">
-              Início
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+              Home
             </Link>
           </li>
           <li>
-            <Link href="#servicos" className="hover:text-blue-600 transition-colors">
+            <Link href="#servicos" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Serviços
             </Link>
           </li>
           <li>
-            <Link href="#sobre" className="hover:text-blue-600 transition-colors">
+            <Link href="#sobre" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Sobre
             </Link>
           </li>
           <li>
-            <Link href="#contato" className="hover:text-blue-600 transition-colors">
+            <Link href="#contato" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
               Contato
+            </Link>
+          </li>
+          <li>
+            <Link href="#contato" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition-colors font-semibold">
+              Solicitar
             </Link>
           </li>
         </ul>
