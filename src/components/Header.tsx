@@ -22,10 +22,10 @@ export default function Header() {
       <nav className={`container-custom flex justify-between items-center px-6 transition-all duration-300 ${isScrolled ? 'py-1' : 'py-2'}`}>
         <Link href="/" className="flex items-center flex-shrink-0">
           <Image 
-            src="/logo-new.png" 
+            src="/img/Designer.png" 
             alt="AMC Automação" 
             width={221}
-            height={77}
+            height={67}
             className={`w-auto h-auto drop-shadow-lg transition-all duration-300 ${isScrolled ? 'scale-75' : 'scale-100'}`}
           />
         </Link>
